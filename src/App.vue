@@ -45,7 +45,7 @@ export default {
   },
 
   data: () => ({
-    drawer: true,
+    drawer: false,
   }),
   methods: { ...mapActions(['GetUserDetails', 'LogOut']) },
   computed: mapGetters(['get_ItemsCount', 'get_user']),
