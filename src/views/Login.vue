@@ -21,7 +21,7 @@
             <v-icon left>mdi-login</v-icon>login
           </v-btn>
         </v-flex>
-        <v-divider class="mt-3"></v-divider>
+        <v-divider class="mt-3"> </v-divider>
         <v-card-actions></v-card-actions>
       </v-card>
     </v-form>
