@@ -68,7 +68,7 @@ const actions = {
             sessionStorage.setItem('authToken', response.data.data.token);
             sessionStorage.setItem('ref', response.data.data.refreshToken);
             sessionStorage.setItem('Oid', response.data.data.id);
-            router.push({ name: 'serviceList' });
+            router.push({ name: 'listCalendar' });
             router.go();
             state.loginLoading = false;
             return;

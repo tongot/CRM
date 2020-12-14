@@ -9,7 +9,7 @@ const getters = {
 };
 const actions = {
   async GetCalendarItems({ commit }, dates) {
-    this.loadCalendar = true;
+    state.loadCalendar = true;
     if (dates.toClear) {
       state.calenderItems = [];
     }
