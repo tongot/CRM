@@ -6,22 +6,22 @@ const state = {
   Service: null,
   loadService: false,
   errorService: null,
-  EmployeesForService:[],
-  pages:1,
+  EmployeesForService: [],
+  pages: 1,
 };
 const getters = {
   get_Services: (state) => state.Services,
   get_Service: (state) => state.Service,
   get_loadService: (state) => state.loadService,
   get_errorService: (state) => state.errorService,
-  get_ServicePages:(state)=>state.pages,
-  get_EmployeesForService:(state)=>state.EmployeesForService
+  get_ServicePages: (state) => state.pages,
+  get_EmployeesForService: (state) => state.EmployeesForService,
 };
 const actions = {
   SetEditServices({ commit }, service) {
     commit('set_EditServices', _.clone(service));
   },
-  async GetServices({ commit },search) {
+  async GetServices({ commit }, search) {
     state.loadService = true;
     await axios
       .get(`servicePro/GetAll?page=${search.page}&search=${search.text}`)
@@ -78,10 +78,10 @@ const actions = {
         estimateHours: service.estimateHours,
         promotionPercent: service.promotion,
         description: service.description,
-        allowOnlineBooking:service.allowOnlineBooking,
-        pricing:service.pricing,
-        categoryId:service.categoryId,
-        employees:service.employees,
+        allowOnlineBooking: service.allowOnlineBooking,
+        pricing: service.pricing,
+        categoryId: service.categoryId,
+        employees: service.employees,
       })
       .then(
         (response) => {
@@ -110,10 +110,10 @@ const actions = {
         estimateHours: service.estimateHours,
         promotionPercent: service.promotionPercent,
         description: service.description,
-        allowOnlineBooking:service.allowOnlineBooking,
-        pricing:service.pricing,
-        categoryId:service.categoryId,
-        employees:service.employees,
+        allowOnlineBooking: service.allowOnlineBooking,
+        pricing: service.pricing,
+        categoryId: service.categoryId,
+        employees: service.employees,
       })
       .then(
         (response) => {
@@ -133,9 +133,9 @@ const actions = {
   },
 };
 const mutations = {
-  set_Services: (state, data) => (state.Services = data.data, state.pages= data.numberOfPages),
+  set_Services: (state, data) => ((state.Services = data.data), (state.pages = data.numberOfPages)),
   set_EditService: (state, data) => (state.Service = data),
-  set_EmployeeForService:(state,data)=>state.EmployeesForService=data
+  set_EmployeeForService: (state, data) => (state.EmployeesForService = data),
 };
 export default {
   state,
