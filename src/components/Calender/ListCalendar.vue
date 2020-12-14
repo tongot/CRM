@@ -3,8 +3,8 @@
     <div v-if="!get_loadCalendar">
       <div v-if="get_CalendarItems != null" class="mt-3">
         <v-card>
-          <v-card-title v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
+          <v-card-title>
+            {{ title }}
           </v-card-title>
           <v-sheet class="d-flex pa-1">
             <v-btn icon class="ma-2" @click="Prev()">
@@ -101,6 +101,7 @@ export default {
       year: '',
       employeeId: '',
     },
+    title: '',
     colorHit: false,
     open: false,
     selectedEvent: {},
@@ -134,6 +135,7 @@ export default {
     },
     Prev() {
       this.$refs.calendar.prev();
+
       setTimeout(() => {
         this.getAppointments();
       }, 100);
@@ -149,6 +151,8 @@ export default {
       return m;
     },
     getAppointments() {
+      //set calendar title
+      this.title = this.$refs.calendar.title;
       //when date stracture is [December,2020]
       if (this.getDates().length === 2) {
         this.yearMonth.month = FullMonthsArr.indexOf(this.getDates()[0]) + 1;
