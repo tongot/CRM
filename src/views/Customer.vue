@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar>
+    <v-toolbar elevation="1">
       <v-toolbar-title>
         <v-btn :to="{ name: 'listCustomer' }" :loading="get_loadCustomer" text large>
           Customers

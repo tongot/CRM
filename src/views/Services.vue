@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar>
+    <v-toolbar elevation="1">
       <v-toolbar-title>servicies </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn :to="{ name: 'newService' }" text>

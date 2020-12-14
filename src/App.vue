@@ -1,9 +1,17 @@
 <template>
   <v-app>
     <SnackBar />
-    <sideBar v-if="get_user != null" />
-    <v-app-bar app color="primary" dark clipped-left>
-      <v-toolbar-title>Xpert-Appo</v-toolbar-title>
+    <v-navigation-drawer v-model="drawer" v-if="get_user != null" app clipped>
+      <sideBar />
+    </v-navigation-drawer>
+    <v-app-bar app color="red" class="darken-4" flat dark clipped-left>
+      <v-btn v-if="get_user != null" @click="drawer = !drawer" icon>
+        <v-icon>
+          mdi-menu
+        </v-icon>
+      </v-btn>
+
+      <v-toolbar-title> Xpert-Appo</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text="" @click="LogOut()">
         <v-icon>mdi-logout</v-icon>
@@ -36,7 +44,9 @@ export default {
     sideBar,
   },
 
-  data: () => ({}),
+  data: () => ({
+    drawer: true,
+  }),
   methods: { ...mapActions(['GetUserDetails', 'LogOut']) },
   computed: mapGetters(['get_ItemsCount', 'get_user']),
   mounted() {

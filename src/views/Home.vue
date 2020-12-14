@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar dark>
+    <v-toolbar elevation="1" dark>
       <v-toolbar-title>Home</v-toolbar-title>
     </v-toolbar>
   </div>

@@ -14,17 +14,19 @@
       </v-card>
       <v-list two-line>
         <v-list-item-group v-if="get_Employees != null">
-          <listItem
-            v-for="employee in get_Employees"
-            :key="employee.id"
-            :data="{
-              data: employee,
-              link: 'editEmployee',
-              detailLink: 'detailEmployee',
-              isSelect: data,
-              from: 'employee',
-            }"
-          />
+          <div v-if="get_Employees.length > 0">
+            <listItem
+              v-for="employee in get_Employees"
+              :key="employee.id"
+              :data="{
+                data: employee,
+                link: 'editEmployee',
+                detailLink: 'detailEmployee',
+                isSelect: data,
+                from: 'employee',
+              }"
+            />
+          </div>
         </v-list-item-group>
       </v-list>
     </v-card>
