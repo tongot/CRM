@@ -68,6 +68,11 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
+            <div v-else>
+              <v-btn @click="setStatus()" color="warning">
+                No Items used >>
+              </v-btn>
+            </div>
             <v-list> </v-list>
           </v-col>
         </v-row>

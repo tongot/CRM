@@ -20,6 +20,7 @@
       <v-card outlined>
         <v-card-text>
           <v-select
+            v-if="data.NotComplete"
             :disabled="checkRouter()"
             :loading="get_loadAppointment"
             label="change status"
@@ -89,6 +90,7 @@ export default {
   },
   data: () => ({
     dialogCloseApp: false,
+    NotComplete: true,
     states: ['new', 'arrived', 'start', 'complete', 'cancelled'],
   }),
   methods: {
@@ -122,8 +124,14 @@ export default {
   },
   computed: mapGetters(['get_Appointer', 'get_loadAppointment', 'get_modalSelectEmployee']),
   mounted() {
+    console.log(this.$refs.StateSelect);
     this.ClearEmployee();
-    this.GetAppointerById(this.data.appointedBy);
+    this.GetAppointerById(this.data.appointedBy).then(() => {
+      console.log('hit');
+      if (this.data.status == this.states[3]) {
+        this.NotComplete = false;
+      }
+    });
   },
 };
 </script>

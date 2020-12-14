@@ -1,33 +1,48 @@
-import axios from 'axios'
+import axios from 'axios';
 const state = {
-    calenderItems:[],
-}
+  calenderItems: [],
+  loadCalendar: false,
+};
 const getters = {
-    get_CalendarItems:(state)=>state.calenderItems,
-}
+  get_CalendarItems: (state) => state.calenderItems,
+  get_loadCalendar: (state) => state.loadCalendar,
+};
 const actions = {
-    async GetCalendarItems({ commit }, date) {
-        state.loadCustomer = true;
-        await axios
-          .get('Appointment/Calendar?month=' + date.month+'&year='+date.year)
-          .then((response) => {
-            if (response.status === 200) {
-              commit('set_CalendarItems', response.data.data);
-            }
-            state.loadCustomer = false;
-          })
-          .catch((ex) => {
-            state.loadCustomer = false;
-            alert('could not load calendar ' + ex);
-          });
-      },
-}
+  async GetCalendarItems({ commit }, dates) {
+    this.loadCalendar = true;
+    if (dates.toClear) {
+      state.calenderItems = [];
+    }
+    await axios
+      .get(
+        'Appointment/Calendar?month=' +
+          dates.data.month +
+          '&year=' +
+          dates.data.year +
+          '&employeeId=' +
+          dates.data.employeeId
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          commit('set_CalendarItems', response.data.data);
+        }
+        state.loadCalendar = false;
+      })
+      .catch((ex) => {
+        state.loadCalendar = false;
+        alert('could not load calendar ' + ex);
+      });
+  },
+};
 const mutations = {
-    set_CalendarItems:(state,data)=>state.calenderItems= data,
-}
-export default{
-    state,
-    getters,
-    actions,
-    mutations
-}
+  set_CalendarItems: (state, data) =>
+    data.forEach((item) => {
+      state.calenderItems.push(item);
+    }),
+};
+export default {
+  state,
+  getters,
+  actions,
+  mutations,
+};

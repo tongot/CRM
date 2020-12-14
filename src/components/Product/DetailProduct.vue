@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="get_Product != null">
     <v-dialog width="500" v-model="modalStock" persistent>
       <v-card flat>
         <v-card-title>
@@ -10,6 +10,32 @@
           </v-icon>
         </v-card-title>
         <Stock :data="id" />
+      </v-card>
+    </v-dialog>
+
+    <v-dialog width="500" v-model="modalDelete" persistent>
+      <v-card flat>
+        <v-card-title> Delete Product( {{ get_Product.name }}) </v-card-title>
+        <v-card-text>
+          <v-alert outlined type="error" prominent border="left">
+            All history associated with this product will be deleted. Press delete to proceed or cancel to go back
+          </v-alert>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn deperessed="" :loading="get_loadProduct" @click="Delete()" color="error">
+            <v-icon>
+              mdi-delete
+            </v-icon>
+            delete
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn deperessed="" @click="modalDelete = !modalDelete" color="success">
+            <v-icon>
+              mdi-cancel
+            </v-icon>
+            cancel</v-btn
+          >
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
@@ -35,12 +61,18 @@
               mdi-pencil
             </v-icon>
           </v-btn>
-          <v-btn icon="" :to="{ name: 'listProduct' }" small>
+          <v-btn icon="" @click="modalDelete = !modalDelete" small>
             <v-icon color="error">
-              mdi-close
+              mdi-delete
             </v-icon>
           </v-btn>
         </v-card>
+        <v-divider class="ml-1" vertical></v-divider>
+        <v-btn icon="" :to="{ name: 'listProduct' }" small>
+          <v-icon color="error">
+            mdi-close
+          </v-icon>
+        </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
       <v-card flat :loading="get_loadProduct">
@@ -69,13 +101,17 @@ export default {
     modalStock: false,
     id: null,
     itemName: '',
+    modalDelete: false,
   }),
   methods: {
-    ...mapActions(['GetProductById', 'GetCategoryById', 'GetBrandById']),
+    ...mapActions(['GetProductById', 'GetCategoryById', 'GetBrandById', 'DeleteProduct']),
     addStock(item) {
       this.itemName = item.name;
       this.id = item.id;
       this.modalStock = !this.modalStock;
+    },
+    Delete() {
+      this.DeleteProduct(this.$route.params.id);
     },
   },
   computed: mapGetters(['get_Product', 'get_loadProduct', 'get_Brand', 'get_Category']),

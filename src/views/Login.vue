@@ -17,13 +17,7 @@
           v-model="credentials.Password"
         ></v-text-field>
         <v-flex class="d-flex justify-center">
-          <v-btn
-            @click="LogIn()"
-            depressed
-            :loading="get_login_loading"
-            color="blue"
-            class="white--text"
-          >
+          <v-btn @click="LogIn()" depressed :loading="get_login_loading" color="blue" class="white--text">
             <v-icon left>mdi-login</v-icon>login
           </v-btn>
         </v-flex>
@@ -35,26 +29,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 export default {
   data: () => ({
     credentials: {
-      Email: "",
-      Password: "",
+      Email: '',
+      Password: '',
     },
     rules: {
-      required: (v) => !!v || "This fieled is required",
+      required: (v) => !!v || 'This fieled is required',
     },
   }),
   methods: {
-    ...mapActions(["Login"]),
+    ...mapActions(['Login']),
     LogIn() {
       if (this.$refs.login.validate()) {
         this.Login(this.credentials);
       }
     },
   },
-  computed: mapGetters(["get_loginError", "get_login_loading"]),
+  computed: mapGetters(['get_loginError', 'get_login_loading']),
 };
 </script>
 

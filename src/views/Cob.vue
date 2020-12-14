@@ -2,12 +2,12 @@
   <div>
     <v-toolbar>
       <v-toolbar-title>
-        <v-btn :to="{ name: 'listCustomer' }" :loading="get_loadCustomer" text large>
-          Customers
+        <v-btn :to="{ name: 'listCob' }" :loading="get_loadCob" text large>
+          COB
         </v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn :to="{ name: 'newCustomer' }" text>
+      <v-btn :to="{ name: 'addCob' }" text>
         <v-icon>mdi-plus</v-icon>
         New
       </v-btn>
@@ -29,7 +29,7 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-  computed: mapGetters(['get_loadCustomer']),
+  computed: mapGetters(['get_loadCob']),
 };
 </script>
 

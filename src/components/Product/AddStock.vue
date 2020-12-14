@@ -66,6 +66,7 @@
           <v-text-field
             label="Price"
             outlined=""
+            v-if="stock.comment != actions[2]"
             type="number"
             :rules="[rules.price]"
             v-model="stock.purchasePrice"
@@ -90,17 +91,6 @@
               ></v-select>
             </div>
           </div>
-          <!-- <div class="mb-5" v-if="stock.comment != actions[0]">
-            <v-btn :loading="get_loadProduct" @click="getStock()" text="">
-              <span v-if="supplier != ''">
-                {{ supplier }}
-              </span>
-              <span v-else>
-                Select stock
-              </span>
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-          </div> -->
 
           <v-text-field
             label="Quantity"
@@ -165,13 +155,7 @@ export default {
         return;
       }
       this.stock.productId = this.data;
-      //   if (this.stock.comment == this.actions[1] || this.stock.comment == this.actions[2]) {
-      //     if (this.stockId == null) {
-      //       this.stockError = 'please select stock';
-      //       return;
-      //     }
-      //     this.stock.id = this.stockId;
-      //   }
+      this.stock.volume = this.stock.volume == '' ? 0 : this.stock.volume;
       this.AddStock(this.stock);
     },
     getStock() {

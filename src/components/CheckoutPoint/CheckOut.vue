@@ -95,7 +95,7 @@
                     </v-form>
                   </v-card-text>
                 </v-card>
-                <v-list dense v-if="get_SelectAppointment.length > 0">
+                <v-list height="400" class="search-list" dense v-if="get_SelectAppointment.length > 0">
                   <v-list-item-group>
                     <v-list-item
                       @click="getAppointments(item.appointmentNumber)"
@@ -227,7 +227,9 @@ export default {
       'GetAppointmentByIdF',
     ]),
     hasIncompleteState() {
-      let incomplete = this.get_CheckoutAppointments.filter((item) => item.status != 'complete');
+      let incomplete = this.get_CheckoutAppointments.filter(
+        (item) => item.status != 'complete' && item.status != 'cancelled'
+      );
       if (incomplete.length > 0) {
         return true;
       }
@@ -285,5 +287,8 @@ export default {
 .div-checkpoint-container {
   background-color: red;
   height: 82vh;
+}
+.search-list {
+  overflow: auto;
 }
 </style>

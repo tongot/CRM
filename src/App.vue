@@ -1,26 +1,14 @@
 <template>
   <v-app>
     <SnackBar />
-    <sideBar />
+    <sideBar v-if="get_user != null" />
     <v-app-bar app color="primary" dark clipped-left>
-      <v-toolbar-title>Saloon</v-toolbar-title>
+      <v-toolbar-title>Xpert-Appo</v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- <v-menu :close-on-content-click="false" offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-badge overlap :content="get_ItemsCount" bordered>
-        </v-badge>
-        <v-btn
-          icon
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon>
-            mdi-cart
-          </v-icon>
-        </v-btn>
-      </template>
-      <Cart/>
-      </v-menu> -->
+      <v-btn text="" @click="LogOut()">
+        <v-icon>mdi-logout</v-icon>
+        Signout
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -49,8 +37,8 @@ export default {
   },
 
   data: () => ({}),
-  methods: { ...mapActions(['GetUserDetails']) },
-  computed: mapGetters(['get_ItemsCount']),
+  methods: { ...mapActions(['GetUserDetails', 'LogOut']) },
+  computed: mapGetters(['get_ItemsCount', 'get_user']),
   mounted() {
     this.GetUserDetails();
   },

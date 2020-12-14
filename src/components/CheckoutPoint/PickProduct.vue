@@ -4,7 +4,7 @@
       <v-card-title
         >Pick Products
         <v-spacer></v-spacer>
-        <v-chip large>{{ `P ${get_totalPrice}` }}</v-chip>
+        <v-chip large>{{ `P ${get_totalPrice.toFixed(2)}` }}</v-chip>
       </v-card-title>
       <v-card-text>
         <v-row>

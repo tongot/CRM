@@ -68,6 +68,19 @@ import productDetail from '../components/Product/ProductDetails';
 import productSales from '../components/Product/ProductSales';
 import productAnalysis from '../components/Product/ProductAnalysis';
 
+import Tax from '../views/Tax';
+import listTaxes from '../components/Tax/ListTax';
+import addTax from '../components/Tax/AddTax';
+import editTax from '../components/Tax/EditTax';
+
+import Cob from '../views/Cob';
+import listCob from '../components/Cob/listCob';
+import addCob from '../components/Cob/AddCob';
+
+import Invoice from '../components/Invoice/Invoice';
+
+import Home from '../views/Home';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -373,6 +386,55 @@ const routes = [
         component: branchEdit,
       },
     ],
+  },
+  {
+    path: '/Tax',
+    name: 'tax',
+    component: Tax,
+    children: [
+      {
+        path: 'list',
+        name: 'listTax',
+        component: listTaxes,
+      },
+      {
+        path: 'addTax',
+        name: 'addTax',
+        component: addTax,
+      },
+      {
+        path: 'editTax/:id',
+        name: 'editTax',
+        component: editTax,
+      },
+    ],
+  },
+  {
+    path: '/Cob',
+    name: 'Cob',
+    component: Cob,
+    children: [
+      {
+        path: 'listCob',
+        name: 'listCob',
+        component: listCob,
+      },
+      {
+        path: 'addCob',
+        name: 'addCob',
+        component: addCob,
+      },
+    ],
+  },
+  {
+    path: '/Invoice/:id',
+    name: 'Invoice',
+    component: Invoice,
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
   },
   // {
   //   path: '/about',

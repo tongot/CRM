@@ -53,7 +53,12 @@ const actions = {
   },
   serviceAddTotal({ state }, services) {
     services.forEach((service) => {
-      state.totalPrice += getPrice(service.price, service.discount);
+      if (service.status == 'cancelled') {
+        service.price = 0;
+      } else {
+        state.totalPrice += getPrice(service.price, service.discount);
+        service.price = getPrice(service.price, service.discount);
+      }
     });
   },
   clearCheckoutProduct({ state, dispatch }) {
@@ -83,7 +88,7 @@ const actions = {
         alert('could not load appointment ' + ex);
       });
   },
-  async GetAppointmentByAppointmentNumber({ commit }, appointmentNumber) {
+  async GetAppointmentByAppointmentNumber({ commit, dispatch }, appointmentNumber) {
     //reduce price by items removed
     state.CheckoutAppointments.forEach((service) => {
       state.totalPrice -= getPrice(service.price, service.discount);
@@ -95,7 +100,11 @@ const actions = {
       .get('Appointment/GetAppointmentByAppointmentNumber/?appointmentNumber=' + appointmentNumber)
       .then((response) => {
         if (response.status === 200) {
-          commit('set_CheckoutAppointments', response.data.data);
+          if (response.data.data.length < 1) {
+            dispatch('Notify', { text: 'No unpaid service(s)', type: 'info' });
+          } else {
+            commit('set_CheckoutAppointments', response.data.data);
+          }
         }
         state.loadCheckout = false;
       })

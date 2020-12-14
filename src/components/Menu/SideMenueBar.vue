@@ -1,16 +1,16 @@
 <template>
   <div>
     <v-navigation-drawer app clipped>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            Saloon
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            smater
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-list-item-group>
+        <v-list-item :to="{ name: 'Home' }">
+          <v-list-item-content>
+            <v-list-item-title class="title">
+              <v-icon>mdi-home</v-icon>
+              Home
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
 
       <v-divider></v-divider>
       <v-list dense nav>
@@ -52,6 +52,15 @@ export default {
           { title: 'Products', link: 'listProduct', icon: 'mdi-clock' },
           { title: 'Brands', link: 'listBrand', icon: 'mdi-clock' },
           { title: 'Suppliers', link: 'listSuppliers', icon: 'mdi-clock' },
+        ],
+      },
+      {
+        title: 'Settings',
+        link: 'inventory',
+        icon: 'mdi-settings',
+        subList: [
+          { title: 'Taxes', link: 'listTax', icon: 'mdi-cash' },
+          { title: 'COB', link: 'listCob', icon: 'mdi-scale-balance' },
         ],
       },
     ],

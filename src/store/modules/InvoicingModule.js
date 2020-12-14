@@ -26,6 +26,7 @@ const actions = {
           discount: item.promotionRate,
           actualAmountPaid: item.price,
           quantity: item.quantity,
+          unitPrice: item.actualPrice,
         };
         products.push(prod);
       });
@@ -76,8 +77,33 @@ const actions = {
         dispatch('Notify', { text: `Failed ${ex}`, type: 'error' });
       });
   },
+
+  async GetInvoiceById({ commit, dispatch }, id) {
+    state.loadInvoice = true;
+    await axios
+      .get('invoicing/?id=' + id)
+      .then(
+        (response) => {
+          if (response.status === 200) {
+            commit('set_Invoice', response.data.data);
+            dispatch('Notify', { text: 'Invoice Loaded', type: 'success' });
+          }
+          state.loadInvoice = false;
+        },
+        (e) => {
+          dispatch('Notify', { text: e.response.data.message, type: 'error' });
+          state.loadInvoice = false;
+        }
+      )
+      .catch((ex) => {
+        dispatch('Notify', { text: `Failed to load ${ex}`, type: 'error' });
+        state.loadInvoice = false;
+      });
+  },
 };
-const mutations = {};
+const mutations = {
+  set_Invoice: (state, data) => (state.Invoice = data),
+};
 export default {
   state,
   getters,

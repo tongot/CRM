@@ -1,15 +1,16 @@
 <template>
   <div>
-    <v-dialog width="500" v-model="modalStock" persistent>
+    <!-- modal set tax -->
+    <v-dialog width="500" v-model="modalTax" persistent>
       <v-card flat>
         <v-card-title>
-          {{ itemName }}
+          Select tax for {{ selectedProduct.name }}
           <v-spacer></v-spacer>
-          <v-icon @click="modalStock = !modalStock">
+          <v-icon @click="modalTax = !modalTax">
             mdi-close
           </v-icon>
         </v-card-title>
-        <Stock :data="id" />
+        <add-tax-to-product :data="selectedProduct" />
       </v-card>
     </v-dialog>
 
@@ -79,13 +80,20 @@
                   </v-icon>
                 </v-btn>
 
-                <v-btn @click="addStock(item)" text="" small>
-                  stock
+                <v-btn @click="getTax(item)" text="" small>
+                  Tax
                 </v-btn>
               </div>
             </template>
           </v-data-table>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text="" v-if="canLaodMore" @click="loadMore()" :loading="get_loadProduct" outlined depressed=""
+            >load more</v-btn
+          >
+          <v-spacer></v-spacer>
+        </v-card-actions>
       </v-card>
     </v-container>
   </div>
@@ -93,11 +101,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Stock from './AddStock';
+import AddTaxToProduct from './AddTaxToProduct.vue';
 export default {
-  components: { Stock },
+  components: { AddTaxToProduct },
   data: () => ({
-    modalStock: false,
+    productsLoaded: 0,
+    canLaodMore: true,
+    modalTax: false,
+    selectedProduct: {},
     id: '',
     itemName: '',
     search: {
@@ -111,18 +122,19 @@ export default {
       { text: 'name', value: 'name' },
       { text: 'code', value: 'code' },
       { text: 'Created on', value: 'createdOn' },
-      { text: 'Discount', value: 'discount' },
+      { text: 'Discount(%)', value: 'discount' },
       { text: 'Price', value: 'price' },
       { text: 'Quantity', value: 'quantity' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
   }),
   methods: {
-    ...mapActions(['GetProducts', 'GetProductCategories', 'GetBrands', 'clearProducts']),
+    ...mapActions(['GetProducts', 'GetProductCategories', 'GetBrands', 'clearProducts', 'GetTaxForProduct']),
     filter() {
       this.btnFilter();
     },
     clearFilters() {
+      this.canLaodMore = true;
       this.search.name = '';
       this.search.code = '';
       this.search.brandId = '';
@@ -138,6 +150,21 @@ export default {
       this.search.fromMount = true;
       this.GetProducts(this.search).then(() => {
         this.search.fromMount = false;
+      });
+    },
+    getTax(item) {
+      this.GetTaxForProduct(item.id).then(() => {
+        this.modalTax = !this.modalTax;
+        this.selectedProduct = item;
+      });
+    },
+    loadMore() {
+      this.productsLoaded = this.get_Products.length;
+      this.GetProducts(this.search).then(() => {
+        this.search.fromMount = false;
+        if (this.productsLoaded === this.get_Products.length) {
+          this.canLaodMore = false;
+        }
       });
     },
   },

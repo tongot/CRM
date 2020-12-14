@@ -5,7 +5,7 @@
         <v-card-title>
           Add Product
           <v-spacer></v-spacer>
-          <v-btn icon="" :to="{ name: 'productDetail' }" small>
+          <v-btn icon="" :to="{ name: 'listProduct' }" small>
             <v-icon color="error">
               mdi-close
             </v-icon>

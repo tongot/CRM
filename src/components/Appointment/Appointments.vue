@@ -86,7 +86,7 @@ export default {
   data: () => ({
     selectedAppointment: {},
     modalDettail: false,
-    states: ['all', 'compeleted', 'arrived', 'start', 'cancelled', 'new'],
+    states: ['all', 'complete', 'arrived', 'start', 'cancelled', 'new'],
     search: {
       startDate: '',
       endDate: '',
@@ -126,6 +126,11 @@ export default {
     },
     details(item) {
       this.selectedAppointment = item;
+      if (item.status == this.states[1]) {
+        this.selectedAppointment.NotComplete = false;
+      } else {
+        this.selectedAppointment.NotComplete = true;
+      }
       this.modalDettail = true;
     },
     closeModalDetail() {
