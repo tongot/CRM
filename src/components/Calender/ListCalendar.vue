@@ -148,7 +148,7 @@ export default {
     },
     getAppointments() {
       //when date stracture is [December,2020]
-      if (this.getDates.length === 2) {
+      if (this.getDates().length === 2) {
         this.yearMonth.month = FullMonthsArr.indexOf(this.getDates()[0]) + 1;
         this.yearMonth.year = this.getDates()[1];
         this.GetCalendarItems({ data: this.yearMonth, toClear: true });
@@ -200,7 +200,8 @@ export default {
     this.GetEmployees(this.search).then(() => {
       this.get_Employees.push({ firstName: 'All', id: '' });
     });
-    this.getDates();
+
+    console.log(this.getDates() + 'kk');
     setTimeout(() => {
       this.getAppointments();
     }, 100);
