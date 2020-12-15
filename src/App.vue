@@ -13,10 +13,34 @@
 
       <v-toolbar-title> Xpert-Appo</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text="" @click="LogOut()">
-        <v-icon>mdi-logout</v-icon>
-        Signout
-      </v-btn>
+      <v-menu v-if="get_user != null" offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-list-item-group>
+            <v-list-item v-bind="attrs" v-on="on">
+              <v-list-item-title>
+                <v-avatar color="red" class="darken-3">
+                  <v-icon>mdi-account</v-icon>
+                </v-avatar>
+                {{ get_user.email }}</v-list-item-title
+              >
+            </v-list-item>
+          </v-list-item-group>
+        </template>
+        <v-card>
+          <v-card-text class="d-flex">
+            <v-btn @click="LogOut()" text class="mr-1">
+              <v-icon>
+                mdi-logout
+              </v-icon>
+              logout</v-btn
+            >
+            <v-btn depressed>
+              <v-icon>mdi-lock</v-icon>
+              change password</v-btn
+            >
+          </v-card-text>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <v-main>

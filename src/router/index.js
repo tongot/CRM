@@ -76,6 +76,7 @@ import editTax from '../components/Tax/EditTax';
 import Cob from '../views/Cob';
 import listCob from '../components/Cob/listCob';
 import addCob from '../components/Cob/AddCob';
+import detailCob from '../components/Cob/CobDetails';
 
 import Invoice from '../components/Invoice/Invoice';
 
@@ -423,6 +424,11 @@ const routes = [
         path: 'addCob',
         name: 'addCob',
         component: addCob,
+      },
+      {
+        path: 'detailCob/:date',
+        name: 'detailCob',
+        component: detailCob,
       },
     ],
   },

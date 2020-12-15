@@ -8,8 +8,8 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn :to="{ name: 'addCob' }" text>
-        <v-icon>mdi-plus</v-icon>
-        New
+        <v-icon>mdi-refresh</v-icon>
+        Run COB
       </v-btn>
     </v-toolbar>
     <div class="mt-1">
