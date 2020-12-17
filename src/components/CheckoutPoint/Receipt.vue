@@ -131,7 +131,12 @@
                   clear
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn @click="addInvoice()" :disabled="Math.sign(getChange) < 0" color="success">
+                <v-btn
+                  :loading="get_loadInvoice"
+                  @click="addInvoice()"
+                  :disabled="Math.sign(getChange) < 0"
+                  color="success"
+                >
                   <v-icon>mdi-content-save</v-icon>
                   Save
                 </v-btn>
@@ -199,7 +204,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['get_CheckoutProducts', 'get_CheckoutAppointments', 'get_totalPrice']),
+    ...mapGetters(['get_CheckoutProducts', 'get_loadInvoice', 'get_CheckoutAppointments', 'get_totalPrice']),
     getChange() {
       return (this.amountReceived - this.get_totalPrice).toFixed(2);
     },

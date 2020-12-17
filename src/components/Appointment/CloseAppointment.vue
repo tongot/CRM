@@ -7,6 +7,18 @@
         <v-row>
           <v-col md="6" sm="12" xs="12">
             <v-form ref="addForm">
+              <div v-if="data.pricingMethod == 'Minimum'">
+                <v-alert type="info" v-if="priceTopay <= data.price"
+                  >Price should be above minimum P {{ data.price.toFixed(2) }}</v-alert
+                >
+                <v-text-field
+                  type="number"
+                  :rules="priceValidate"
+                  outlined
+                  label="Actual price"
+                  v-model="actualPrice"
+                ></v-text-field>
+              </div>
               <v-select
                 label="select category"
                 @input="getProduct()"
@@ -62,7 +74,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="setStatus()">
+                <v-btn :loading="get_loadAppointment" @click="setStatus()">
                   <v-icon>mdi-check</v-icon>
                   Ok
                 </v-btn>
@@ -87,6 +99,7 @@ export default {
   data: () => ({
     error: null,
     categories: ['Refreshment', 'Ingredient'],
+    actualPrice: '',
     category: '',
     maxValue: '',
     productId: '',
@@ -139,14 +152,39 @@ export default {
       this.selectedItems.splice(index, 1);
     },
     setStatus() {
-      console.log(this.data);
-      const state = { status: this.data.status, id: this.data.appointmentId, usedItems: this.selectedItems };
+      const state = {
+        status: this.data.status,
+        id: this.data.appointmentId,
+        actualPrice: this.actualPrice,
+        usedItems: this.selectedItems,
+      };
       this.ChangeAppointmentState(state).then(() => {
         this.$emit('close', false);
       });
+      this.selectItems = [];
+      this.category = '';
+      this.maxValue = '';
+      this.productId = '';
+      this.productName = '';
+      this.volume = '';
     },
   },
-  computed: mapGetters(['get_loadAppointment', 'get_Ingredients', 'get_ItemUsed']),
+  computed: {
+    ...mapGetters(['get_loadAppointment', 'get_Ingredients', 'get_ItemUsed']),
+    priceTopay() {
+      return this.actualPrice - this.data.price;
+    },
+    priceValidate() {
+      let errors = [];
+      if (!this.actualPrice) {
+        errors.push('please enter actual price');
+      }
+      if (this.actualPrice < this.data.price) {
+        errors.push('Price lower than minimum');
+      }
+      return errors;
+    },
+  },
   mounted() {
     this.selectItems = [];
     this.category = '';

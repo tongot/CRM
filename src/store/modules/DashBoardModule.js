@@ -3,7 +3,7 @@ const state = {
   ProductUsage: null,
   ProdAnalysis: null,
   loadDash: false,
-  CobResults: [],
+  CobResults: null,
 };
 const getters = {
   get_ProductUsage: (state) => state.ProductUsage,
@@ -43,7 +43,7 @@ const actions = {
       });
   },
   async GetCobResults({ commit }, date) {
-    state.CobResults = [];
+    state.CobResults = null;
     state.loadDash = true;
     await axios
       .get('Dashboard/GetCobResults/?date=' + date)

@@ -110,13 +110,12 @@ const actions = {
 
   async ChangeAppointmentState({ dispatch, state }, status) {
     state.loadAppointment = true;
-    console.log(status);
-    console.log(state.ItemsUsed);
     await axios
       .post('Appointment/ChangeState/', {
         id: status.id,
         status: status.status,
         usedItems: status.usedItems,
+        actualPrice: status.actualPrice,
       })
       .then(
         (response) => {

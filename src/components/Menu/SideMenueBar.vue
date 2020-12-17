@@ -43,7 +43,7 @@ export default {
       { title: 'Checkout', link: 'checkout', icon: 'mdi-clock', subList: [] },
 
       {
-        title: 'Invenory',
+        title: 'Inventory',
         link: 'inventory',
         icon: 'mdi-clock',
         subList: [

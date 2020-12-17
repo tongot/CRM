@@ -13,7 +13,6 @@ const getters = {
 };
 const actions = {
   async AddInvoice({ state, dispatch }, invoice) {
-    console.log(invoice);
     state.loadInvoice = true;
     let products = [];
     let services = [];
@@ -45,9 +44,6 @@ const actions = {
         services.push(prod);
       });
     }
-
-    console.log(services);
-    console.log(products);
 
     await axios
       .post('Invoicing', {

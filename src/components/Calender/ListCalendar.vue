@@ -206,8 +206,6 @@ export default {
     this.GetEmployees(this.search).then(() => {
       this.get_Employees.push({ firstName: 'All', id: '' });
     });
-
-    console.log(this.getDates() + 'kk');
     setTimeout(() => {
       this.getAppointments();
     }, 100);
