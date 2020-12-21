@@ -10,6 +10,8 @@ const getters = {
 const actions = {
   async GetCalendarItems({ commit }, dates) {
     state.loadCalendar = true;
+
+    //check need be to clear the current calendar data for new data
     if (dates.toClear) {
       state.calenderItems = [];
     }

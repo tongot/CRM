@@ -32,6 +32,9 @@ import listEmployee from '../components/Employee/Employees';
 import addEmployee from '../components/Employee/AddEmployee';
 import editEmployee from '../components/Employee/EditEmployee';
 import detailEmployee from '../components/Employee/DetailEmployee';
+import employeeAppointment from '../components/Employee/EmployeeAppointment';
+import employeeInvoice from '../components/Employee/EmployeeInvoices';
+import employeeDetails from '../components/Employee/EmployeeDetails';
 
 import Customer from '../views/Customer';
 import listCustomer from '../components/Customer/Customers';
@@ -268,6 +271,23 @@ const routes = [
         path: 'detail/:id',
         name: 'detailEmployee',
         component: detailEmployee,
+        children: [
+          {
+            path: 'appointment',
+            name: 'employee-appointment',
+            component: employeeAppointment,
+          },
+          {
+            path: 'invoices',
+            name: 'employee-invoices',
+            component: employeeInvoice,
+          },
+          {
+            path: 'details',
+            name: 'employee-details',
+            component: employeeDetails,
+          },
+        ],
       },
     ],
   },

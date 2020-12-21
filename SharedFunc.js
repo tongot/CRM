@@ -334,7 +334,7 @@ const Duration = [
   [660, '11h'],
   [720, '12h'],
 ];
-
+const AppointmentState = ['all', 'complete', 'arrived', 'start', 'cancelled', 'new'];
 const Colors = [
   'red',
   'black',
@@ -422,4 +422,16 @@ function truncateString(string) {
   }
   return string;
 }
-export { StartTIme, getColor, Duration, getDuration, getMonth, getStateColor, truncateString, FullMonthsArr, HalfMonth };
+export {
+  StartTIme,
+  getColor,
+  Duration,
+  getDuration,
+  getMonth,
+  getStateColor,
+  truncateString,
+  FullMonthsArr,
+  HalfMonth,
+  Months,
+  AppointmentState,
+};

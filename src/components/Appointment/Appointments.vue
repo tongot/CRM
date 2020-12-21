@@ -76,6 +76,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import AppointmentDetail from './AppointmentDetails';
 import datePicker from '../Shared/DatePicker';
+import { AppointmentState } from '../../../SharedFunc';
 const moment = require('moment');
 
 export default {
@@ -126,7 +127,7 @@ export default {
     },
     details(item) {
       this.selectedAppointment = item;
-      if (item.status == this.states[1]) {
+      if (item.status == AppointmentState[1]) {
         this.selectedAppointment.NotComplete = false;
       } else {
         this.selectedAppointment.NotComplete = true;

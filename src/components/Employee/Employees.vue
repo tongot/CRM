@@ -21,7 +21,7 @@
               :data="{
                 data: employee,
                 link: 'editEmployee',
-                detailLink: 'detailEmployee',
+                detailLink: 'employee-details',
                 isSelect: data,
                 from: 'employee',
               }"
