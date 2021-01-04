@@ -12,7 +12,7 @@
       <v-btn class="ml-5 mb-5" color="success" @click="printR()">
         print
       </v-btn>
-      <v-btn class="ml-5 mb-5" color="error" :to="{ name: 'listProduct' }">
+      <v-btn class="ml-5 mb-5" color="error" @click="back()">
         close
       </v-btn>
 
@@ -109,6 +109,9 @@ export default {
   data: () => ({}),
   methods: {
     ...mapActions(['GetInvoiceById']),
+    back() {
+      this.$router.go(-1);
+    },
     printR() {
       print({ printable: 'invoice', type: 'html', targetStyles: ['*'], header: 'Weillers Invoice' });
     },

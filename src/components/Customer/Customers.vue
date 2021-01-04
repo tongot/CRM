@@ -20,7 +20,7 @@
             :data="{
               data: customer,
               link: 'editCustomer',
-              detailLink: 'detailCustomer',
+              detailLink: 'customer-details',
               isSelect: data,
               from: 'customer',
             }"

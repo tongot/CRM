@@ -22,7 +22,9 @@ const actions = {
           '&year=' +
           dates.data.year +
           '&employeeId=' +
-          dates.data.employeeId
+          dates.data.employeeId +
+          '&customerId=' +
+          dates.data.customerId
       )
       .then((response) => {
         if (response.status === 200) {

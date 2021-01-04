@@ -100,6 +100,7 @@ export default {
       month: '',
       year: '',
       employeeId: '',
+      customerId: null,
     },
     title: '',
     colorHit: false,

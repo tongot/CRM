@@ -5,11 +5,13 @@ const state = {
   Invoice: null,
   Invoices: [],
   loadInvoice: false,
+  CustomerInvoices: [],
 };
 const getters = {
   get_Invoice: (state) => state.Invoice,
   get_loadInvoice: (state) => state.loadInvoice,
   get_Invoices: (state) => state.Invoices,
+  get_CustomerInvoice: (state) => state.CustomerInvoices,
 };
 const actions = {
   async AddInvoice({ state, dispatch }, invoice) {
@@ -96,9 +98,31 @@ const actions = {
         state.loadInvoice = false;
       });
   },
+  async GetCustomerInvoice({ commit, dispatch }, id) {
+    state.loadInvoice = true;
+    await axios
+      .get('invoicing/GetCustomerInvoice?id=' + id)
+      .then(
+        (response) => {
+          if (response.status === 200) {
+            commit('set_CustomerInvoice', response.data.data);
+          }
+          state.loadInvoice = false;
+        },
+        (e) => {
+          dispatch('Notify', { text: e.response.data.message, type: 'error' });
+          state.loadInvoice = false;
+        }
+      )
+      .catch((ex) => {
+        dispatch('Notify', { text: `Failed to load ${ex}`, type: 'error' });
+        state.loadInvoice = false;
+      });
+  },
 };
 const mutations = {
   set_Invoice: (state, data) => (state.Invoice = data),
+  set_CustomerInvoice: (state, data) => (state.CustomerInvoices = data),
 };
 export default {
   state,
