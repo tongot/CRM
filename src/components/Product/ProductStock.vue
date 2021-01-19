@@ -27,19 +27,8 @@
     </v-dialog>
 
     <v-card :loading="get_loadProduct" flat="">
-      <v-card-title
-        >Stock track<v-spacer></v-spacer>
-        <v-card flat class="white--text pa-1 mr-1" color="warning">
-          {{ `Intenal:${get_StockTrack.InternalTrans}` }}
-        </v-card>
-        <v-card flat class="white--text pa-1 mr-1" color="error">
-          {{ `Return:${get_StockTrack.ReturnStock}` }}
-        </v-card>
-        <v-card flat class="white--text pa-1" color="success">
-          {{ `In:${get_StockTrack.NewStock}` }}
-        </v-card>
-      </v-card-title>
-      {{ get_StockTrack }}
+      <v-card-title>Stock track<v-spacer></v-spacer> </v-card-title>
+
       <v-form ref="getForm" @submit.prevent="filter()">
         <v-row>
           <v-col md="3" sm="12" cols="12" xs="12">
@@ -61,6 +50,44 @@
         </v-row>
       </v-form>
 
+      <v-row>
+        <v-col cols="12" md="3" sm="12" xs="12">
+          <dashboad-card
+            :data="{
+              icon: 'mdi-stocking',
+              title: 'Intenal',
+              value: get_StockTrack.InternalTrans,
+            }"
+          />
+        </v-col>
+        <v-col cols="12" md="3" sm="12" xs="12">
+          <dashboad-card
+            :data="{
+              icon: 'mdi-stocking',
+              title: 'Returns',
+              value: get_StockTrack.ReturnStock * -1,
+            }"
+          />
+        </v-col>
+        <v-col cols="12" md="3" sm="12" xs="12">
+          <dashboad-card
+            :data="{
+              icon: 'mdi-stocking',
+              title: 'In',
+              value: get_StockTrack.InternalTrans,
+            }"
+          />
+        </v-col>
+        <v-col cols="12" md="3" sm="12" xs="12">
+          <dashboad-card
+            :data="{
+              icon: 'mdi-stocking',
+              title: 'Total as per date filters',
+              value: get_StockTrack.NewStock + get_StockTrack.ReturnStock,
+            }"
+          />
+        </v-col>
+      </v-row>
       <v-data-table
         :loading="get_loadProduct"
         :headers="headers"
@@ -93,10 +120,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import datePicker from '../../components/Shared/DatePicker';
+import DashboadCard from '../Dashboard/DashboadCard.vue';
 const moment = require('moment');
 export default {
   components: {
     datePicker,
+    DashboadCard,
   },
   data: () => ({
     modalDetail: false,

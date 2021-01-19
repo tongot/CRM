@@ -291,7 +291,7 @@ const mutations = {
     }),
 };
 const getDate = (item) => {
-  return moment(item.date).format('YYYY-MM-DD, HH:mm:ss');
+  return moment(item).format('YYYY-MM-DD, HH:mm:ss');
 };
 export default {
   state,
