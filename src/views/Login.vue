@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center">
-    <v-form ref="login" class="registerForm">
+    <v-form ref="login" class="login">
       <v-card width="350" class="pa-4 mt-10" flat>
         <div class="d-flex justify-center mb-4">
-          <v-avatar color="blue" size="70">
+          <v-avatar color="#df9ca8" size="70">
             <v-icon class="display-3 white--text">mdi-account</v-icon>
           </v-avatar>
         </div>
@@ -17,7 +17,7 @@
           v-model="credentials.Password"
         ></v-text-field>
         <v-flex class="d-flex justify-center">
-          <v-btn @click="LogIn()" depressed :loading="get_login_loading" color="blue" class="white--text">
+          <v-btn color="#df9ca8" @click="LogIn()" depressed :loading="get_login_loading" class="white--text">
             <v-icon left>mdi-login</v-icon>login
           </v-btn>
         </v-flex>
@@ -34,11 +34,11 @@ export default {
   data: () => ({
     credentials: {
       Email: '',
-      Password: '',
+      Password: ''
     },
     rules: {
-      required: (v) => !!v || 'This fieled is required',
-    },
+      required: (v) => !!v || 'This fieled is required'
+    }
   }),
   methods: {
     ...mapActions(['Login']),
@@ -46,10 +46,14 @@ export default {
       if (this.$refs.login.validate()) {
         this.Login(this.credentials);
       }
-    },
+    }
   },
-  computed: mapGetters(['get_loginError', 'get_login_loading']),
+  computed: mapGetters(['get_loginError', 'get_login_loading'])
 };
 </script>
 
-<style></style>
+<style>
+.login {
+  margin-top: 150px;
+}
+</style>

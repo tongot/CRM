@@ -56,7 +56,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'Intenal',
-              value: get_StockTrack.InternalTrans,
+              value: get_StockTrack.InternalTrans*-1,
             }"
           />
         </v-col>
@@ -74,7 +74,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'In',
-              value: get_StockTrack.InternalTrans,
+              value: get_StockTrack.NewStock,
             }"
           />
         </v-col>

@@ -18,7 +18,7 @@ const state = {
   EditOrgAdminDialog: false,
   AdminUserEdit: null,
   OrgRoles: [],
-  OrgRoleError: null,
+  OrgRoleError: null
 };
 const getters = {
   get_user: (state) => state.user,
@@ -34,7 +34,7 @@ const getters = {
   get_editOrgAdminsDialog: (state) => state.EditOrgAdminDialog,
   get_adminUserEdit: (state) => state.AdminUserEdit,
   get_orgRoles: (state) => state.OrgRoles,
-  get_orgRoleError: (state) => state.OrgRoleError,
+  get_orgRoleError: (state) => state.OrgRoleError
 };
 const actions = {
   OpenDialogEditOrgAdmin() {
@@ -58,7 +58,7 @@ const actions = {
     await axios
       .post('/userAccount/login', {
         email: credentials.Email,
-        password: credentials.Password,
+        password: credentials.Password
       })
       .then(
         (response) => {
@@ -98,6 +98,7 @@ const actions = {
   },
   async GetUserDetails({ dispatch }) {
     if (state.user == null) {
+      state.loginLoading = true;
       let response;
       let id = sessionStorage.getItem('Oid');
       if (id != null) {
@@ -105,13 +106,16 @@ const actions = {
         try {
           if (response.status === 200) {
             dispatch('SetUser', response.data);
+            state.loginLoading = false;
           }
         } catch (error) {
           alert('Failed to load account');
+          state.loginLoading = false;
         }
       } else {
         if (router.currentRoute.name != 'login') {
           router.push({ name: 'login' });
+          state.loginLoading = false;
         }
       }
     }
@@ -168,7 +172,7 @@ const actions = {
         email: User.email,
         password: User.password,
         passwordConfirm: User.passwordConfirm,
-        organizationId: User.organizationId,
+        organizationId: User.organizationId
       })
       .then(
         (response) => {
@@ -200,7 +204,7 @@ const actions = {
         email: state.UserEdit.email,
         branchId: state.UserEdit.branchId,
         roles: state.UserEdit.roles,
-        isActive: state.UserEdit.isActive,
+        isActive: state.UserEdit.isActive
       })
       .then(
         (response) => {
@@ -229,7 +233,7 @@ const actions = {
         name: state.AdminUserEdit.name,
         surname: state.AdminUserEdit.surname,
         email: state.AdminUserEdit.email,
-        isActive: state.AdminUserEdit.isActive,
+        isActive: state.AdminUserEdit.isActive
       })
       .then(
         (response) => {
@@ -254,7 +258,7 @@ const actions = {
     state.OrgRoleError = null;
     await axios
       .post('/userAccount/AddNewRole', {
-        name: role,
+        name: role
       })
       .then(
         (response) => {
@@ -280,7 +284,7 @@ const actions = {
     state.OrgRoleError = null;
     await axios
       .get('/userAccount/AllRoles', {
-        role: role,
+        role: role
       })
       .then(
         (response) => {
@@ -313,7 +317,7 @@ const actions = {
         passwordConfirm: User.passwordConfirm,
         organizationId: User.organizationId,
         branchId: User.branchId,
-        roles: User.roles,
+        roles: User.roles
       })
       .then(
         (response) => {
@@ -340,7 +344,7 @@ const actions = {
     sessionStorage.removeItem('Oid');
     router.push({ name: 'login' });
     router.go();
-  },
+  }
 };
 const mutations = {
   set_user: (state, data) => (state.user = data),
@@ -349,12 +353,12 @@ const mutations = {
   set_allUsers: (state, data) => (state.users = data),
   set_userEdit: (state, data) => (state.UserEdit = data),
   set_adminsForOrg: (state, data) => (state.AdminsForOrg = data),
-  set_adminUserEdit: (state, data) => (state.AdminUserEdit = data),
+  set_adminUserEdit: (state, data) => (state.AdminUserEdit = data)
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

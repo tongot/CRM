@@ -1,76 +1,90 @@
 <template>
-<div class="container"> 
-    <v-card  flat class="mx-auto" max-width="1000">
-          <v-card flat>
-          <v-card-text>
-               <v-text-field
-                append-icon="mdi-magnify"
-                placeholder="search key word"
-                v-model="search.text"
-                @keyup="searchField()"
-        >
-         </v-text-field>
-          </v-card-text>
-       
+  <div class="container">
+    <v-card flat class="mx-auto" max-width="1000">
+      <v-card flat>
+        <v-card-text>
+          <v-text-field
+            append-icon="mdi-magnify"
+            placeholder="search key word"
+            v-model="search.text"
+            @keyup="searchField()"
+          >
+          </v-text-field>
+        </v-card-text>
       </v-card>
 
-    <div>
-        <ServiceItem v-for="service in get_Services" :key="service.id" :service="service"/>
-  </div>
-  <div>
-         <v-pagination v-model="search.page" :length="get_ServicePages" @input="SearchBtn()" circle ></v-pagination>
-  </div>
+      <div>
+        <v-data-table
+          :loading="get_loadService"
+          :headers="headers"
+          :items="get_Services"
+          hide-default-footer
+          class="elevation-1 mt-3"
+        >
+          <template v-slot:item.actions="{ item }">
+            <div class="d-flex">
+              <v-btn :to="{ name: 'editService', params: { id: item.id } }" small icon="">
+                <v-icon small>
+                  mdi-eye
+                </v-icon>
+              </v-btn>
+            </div>
+          </template>
+        </v-data-table>
+      </div>
+      <div>
+        <v-pagination v-model="search.page" :length="get_ServicePages" @input="SearchBtn()" circle></v-pagination>
+      </div>
     </v-card>
-     
-</div>
- 
+  </div>
 </template>
 
 <script>
-
-import { mapActions, mapGetters } from 'vuex'
-import ServiceItem from './ServiceItem'
+import { mapActions, mapGetters } from 'vuex';
 export default {
-data:()=>({
-    search:{
-        page:1,
-        text:'',
-    }
-}),
-components:{
-    ServiceItem
-},
-methods:{
-    ...mapActions(['GetServices'])
-    ,SearchBtn(){
-       this.GetServices(this.search) 
+  data: () => ({
+    search: {
+      page: 1,
+      text: ''
     },
-    searchField(){
-        if(this.search.text.length>=3){
-           this.searchFunc();
-           
-        }
-        if(this.search.text.length==''){
-            this.searchFunc();
-        }
+    headers: [
+      { text: 'name', value: 'name' },
+      { text: 'pricing', value: 'pricing' },
+      { text: 'Estimate duration', value: 'estimateHours' },
+      { text: 'Price', value: 'price' },
+      { text: 'Actions', value: 'actions', sortable: false }
+    ]
+  }),
+  methods: {
+    ...mapActions(['GetServices']),
+    SearchBtn() {
+      this.GetServices(this.search);
     },
-    searchFunc(){
-           setTimeout(()=>{
-                this.search.page=1;
-                this.GetServices(this.search)
-                return
-            },1000)
+    searchField() {
+      if (this.search.text.length >= 3) {
+        this.searchFunc();
+      }
+      if (this.search.text.length == '') {
+        this.searchFunc();
+      }
+    },
+    searchFunc() {
+      setTimeout(() => {
+        this.search.page = 1;
+        this.GetServices(this.search);
+        return;
+      }, 1000);
     }
-},
-computed:mapGetters(['get_Services','get_ServicePages']),
-mounted(){
-    this.GetServices({page:1,text:''})
-}
-}
+  },
+  computed: mapGetters(['get_Services', 'get_ServicePages', 'get_loadService']),
+  mounted() {
+    this.GetServices({ page: 1, text: '' });
+  }
+};
 </script>
 
 <style scoped>
-    .container{
-        width: 100%;
-    }
+.container {
+  width: 100%;
+}
 </style>

@@ -50,158 +50,181 @@ import Invoice from '../components/Invoice/Invoice';
 
 import Home from '../views/Home';
 
+import Landing from '../views/Landing';
+import landing from './landing';
+
+import store from '../store/index';
+
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/',
+    name: 'Landing',
+    component: Landing,
+    children: landing
+  },
+  {
+    path: '/Home',
+    name: 'Home',
+    component: Home,
+    meta: { auth: true }
+  },
+  {
     path: '/login',
     name: 'login',
-    component: LogIn,
+    component: LogIn
   },
   {
     path: '/pay-point',
     name: 'pay-point',
     component: PayPoint,
+    meta: { auth: true },
     children: [
       {
         path: 'checkout',
         name: 'checkout',
-        component: checkout,
-      },
-    ],
+        component: checkout
+      }
+    ]
   },
   {
     path: '/calendar',
     name: 'calendar',
     component: Calendar,
+    meta: { auth: true },
     children: [
       {
         path: 'calendar',
         name: 'listCalendar',
-        component: listCalendar,
-      },
-    ],
+        component: listCalendar
+      }
+    ]
   },
 
   {
     path: '/Appointment',
     name: 'appointment',
     component: Appointment,
-    children: appointmentChildren,
+    meta: { auth: true },
+    children: appointmentChildren
   },
   {
     path: '/supplier',
     name: 'supplier',
     component: Supplier,
-    children: supplierChildren,
+    meta: { auth: true },
+    children: supplierChildren
   },
   {
     path: '/brand',
     name: 'brand',
     component: Brand,
-    children: brandChildren,
+    meta: { auth: true },
+    children: brandChildren
   },
   {
     path: '/product',
     name: 'product',
     component: Product,
-    children: productChildren,
+    meta: { auth: true },
+    children: productChildren
   },
   {
     path: '/employee',
     name: 'employee',
     component: Employee,
-    children: employeeChildren,
+    meta: { auth: true },
+    children: employeeChildren
   },
   {
     path: '/customer',
     name: 'customer',
     component: Customer,
-    children: customerChildren,
+    meta: { auth: true },
+    children: customerChildren
   },
   {
     path: '/productCategory',
     name: 'category',
     component: Category,
-    children: categoryChildren,
+    meta: { auth: true },
+    children: categoryChildren
   },
   {
     path: '/services',
     name: 'services',
     component: Services,
-    children: serviceChildren,
+    meta: { auth: true },
+    children: serviceChildren
   },
   {
     path: '/Tax',
     name: 'tax',
     component: Tax,
-    children: taxChildren,
+    meta: { auth: true },
+    children: taxChildren
   },
   {
     path: '/Cob',
     name: 'Cob',
     component: Cob,
-    children: cobChildren,
+    meta: { auth: true },
+    children: cobChildren
   },
   {
     path: '/Invoice/:id',
     name: 'Invoice',
     component: Invoice,
+    meta: { auth: true }
   },
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-
   {
     path: '/Users',
     name: 'users',
     component: Users,
+    meta: { auth: true },
     children: [
       {
         path: 'newUser',
         name: 'newUser',
-        component: newUser,
+        component: newUser
       },
       {
         path: 'roles',
         name: 'roles',
-        component: roles,
-      },
-    ],
+        component: roles
+      }
+    ]
   },
   {
     path: '/Branches',
     name: 'branches',
     component: Branches,
+    meta: { auth: true },
     children: [
       {
         path: 'list',
         name: 'branchList',
-        component: branchList,
+        component: branchList
       },
       {
         path: 'edit/:branchId',
         name: 'branchEdit',
-        component: branchEdit,
-      },
-    ],
-  },
-
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+        component: branchEdit
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth && store.getters.get_user == null) {
+    next('/login');
+  }
+  next();
+});
 export default router;

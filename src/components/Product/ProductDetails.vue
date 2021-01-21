@@ -25,13 +25,11 @@
           <p class="pl-4">{{ get_Category.name }}</p>
           <v-subheader>Operating Volume</v-subheader>
           <p class="pl-4">{{ get_Product.volume }}</p>
-          <v-subheader>Operating Units</v-subheader>
-          <p class="pl-4">{{ get_Product.operatingUnits }}</p>
         </v-col>
         <v-col md="2" cols="12" xs="12" sm="12">
           <h4>Pricing</h4>
           <v-divider></v-divider>
-          <v-subheader>Quantity</v-subheader>
+          <v-subheader>Quantity available for sale</v-subheader>
           <p class="pl-4">{{ get_Product.quantity }}</p>
           <v-subheader>Price</v-subheader>
           <p class="pl-4">P {{ get_Product.price.toFixed(2) }}</p>
@@ -46,7 +44,7 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-  computed: mapGetters(['get_Product', 'get_Brand', 'get_Category']),
+  computed: mapGetters(['get_Product', 'get_Brand', 'get_Category'])
 };
 </script>
 
