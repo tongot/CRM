@@ -115,8 +115,8 @@ const actions = {
       } else {
         if (router.currentRoute.name != 'login') {
           router.push({ name: 'login' });
-          state.loginLoading = false;
         }
+        state.loginLoading = false;
       }
     }
   },
