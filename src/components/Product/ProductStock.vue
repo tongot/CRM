@@ -56,7 +56,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'Intenal',
-              value: get_StockTrack.InternalTrans*-1,
+              value: get_StockTrack.InternalTrans * -1
             }"
           />
         </v-col>
@@ -65,7 +65,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'Returns',
-              value: get_StockTrack.ReturnStock * -1,
+              value: get_StockTrack.ReturnStock * -1
             }"
           />
         </v-col>
@@ -74,7 +74,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'In',
-              value: get_StockTrack.NewStock,
+              value: get_StockTrack.NewStock
             }"
           />
         </v-col>
@@ -83,7 +83,7 @@
             :data="{
               icon: 'mdi-stocking',
               title: 'Total as per date filters',
-              value: get_StockTrack.NewStock + get_StockTrack.ReturnStock,
+              value: get_StockTrack.NewStock + get_StockTrack.ReturnStock + get_StockTrack.InternalTrans
             }"
           />
         </v-col>
@@ -125,7 +125,7 @@ const moment = require('moment');
 export default {
   components: {
     datePicker,
-    DashboadCard,
+    DashboadCard
   },
   data: () => ({
     modalDetail: false,
@@ -133,7 +133,7 @@ export default {
     search: {
       startDate: '',
       endDate: '',
-      id: '',
+      id: ''
     },
     headers: [
       { text: 'Stock Id', value: 'id' },
@@ -142,8 +142,8 @@ export default {
       { text: 'Purchase Price', value: 'price' },
       { text: 'Date', value: 'date' },
       { text: 'Action', value: 'comment' },
-      { text: '', value: 'actions' },
-    ],
+      { text: '', value: 'actions' }
+    ]
   }),
   methods: {
     ...mapActions(['GetStockForProduct', 'GetAppointerById']),
@@ -172,18 +172,18 @@ export default {
     },
     getDateE(event) {
       this.search.endDate = event;
-    },
+    }
   },
   computed: mapGetters([
     'get_StocksForProd',
     'get_loadProduct',
     'get_Appointer',
     'get_loadAppointment',
-    'get_StockTrack',
+    'get_StockTrack'
   ]),
   mounted() {
     this.clearFilter();
-  },
+  }
 };
 </script>
 
