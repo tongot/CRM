@@ -10,7 +10,7 @@ const state = {
   AppointmentsF: [],
   Ingredients: [],
   ItemsUsed: [],
-  AppointmentDetail: {},
+  AppointmentDetail: {}
 };
 const getters = {
   get_Appointments: (state) => state.Appointments,
@@ -21,7 +21,7 @@ const getters = {
   get_AppointmentsF: (state) => state.AppointmentsF,
   get_Ingredients: (state) => state.Ingredients,
   get_ItemUsed: (state) => state.ItemsUsed,
-  get_AppointmentDetail: (state) => state.AppointmentDetail,
+  get_AppointmentDetail: (state) => state.AppointmentDetail
 };
 const actions = {
   editAppointmentCustomer({ state }, id) {
@@ -46,7 +46,7 @@ const actions = {
         employeeId: search.employee,
         serviceId: search.service,
         status: search.status,
-        currentCount: state.AppointmentsF.length,
+        currentCount: state.AppointmentsF.length
       })
       .then((response) => {
         if (response.status === 200) {
@@ -115,7 +115,7 @@ const actions = {
         id: status.id,
         status: status.status,
         usedItems: status.usedItems,
-        actualPrice: status.actualPrice,
+        actualPrice: status.actualPrice
       })
       .then(
         (response) => {
@@ -138,6 +138,8 @@ const actions = {
     let appointments = [];
     state.loadAppointment = true;
 
+    console.log(appointment);
+
     appointment.appointments.forEach((item) => {
       const appoint = {
         date: appointment.date,
@@ -147,7 +149,7 @@ const actions = {
         startTime: item.startTime,
         endTime: item.endTime,
         appointmentDate: appointment.date,
-        price: item.price,
+        price: item.price
       };
       appointments.push(appoint);
     });
@@ -155,7 +157,7 @@ const actions = {
     state.AppointmentError = null;
     await axios
       .post('Appointment', {
-        appointments: appointments,
+        appointments: appointments
       })
       .then(
         (response) => {
@@ -193,7 +195,7 @@ const actions = {
         status: appointment.data.status,
         bookedOn: appointment.data.bookedOn,
         startDate: `${appointment.data.date} ${appointment.data.startTime}:00`,
-        endDate: `${appointment.data.date} ${appointment.data.endTime}:00`,
+        endDate: `${appointment.data.date} ${appointment.data.endTime}:00`
       })
       .then(
         (response) => {
@@ -226,7 +228,7 @@ const actions = {
         employeeId: appointment.app.employee.id,
         date: appointment.date,
         startDate: `${appointment.date} ${appointment.app.startTime}:00`,
-        endDate: `${appointment.date} ${appointment.app.endTime}:00`,
+        endDate: `${appointment.date} ${appointment.app.endTime}:00`
       })
       .then(
         (response) => {
@@ -263,7 +265,7 @@ const actions = {
         state.loadAppointment = false;
         alert('could not load appointer ' + ex);
       });
-  },
+  }
 };
 const mutations = {
   set_Appointments: (state, data) => (state.Appointments = data),
@@ -271,15 +273,17 @@ const mutations = {
   set_Appointment: (state, data) => (state.Appointment = data),
   set_Ingredient: (state, data) => (state.Ingredients = data),
   set_AppointmentDetail: (state, data) => (state.AppointmentDetail = data),
-  set_AppointmentsF: (state, data) =>
+  set_AppointmentsF: (state, data) => (
+    (state.AppointmentsF = []),
     data.forEach((item) => {
       state.AppointmentsF.push(item);
-    }),
+    })
+  )
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

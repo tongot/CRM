@@ -60,8 +60,13 @@
           </v-btn>
         </v-col>
       </v-row>
-
-      <v-data-table :headers="headers" :items="get_AppointmentsF" hide-default-footer class="elevation-1">
+      <v-data-table
+        :loading="get_loadAppointment"
+        :headers="headers"
+        :items="get_AppointmentsF"
+        hide-default-footer
+        class="elevation-1"
+      >
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="details(item)">
             mdi-eye
@@ -82,7 +87,7 @@ const moment = require('moment');
 export default {
   components: {
     AppointmentDetail,
-    datePicker,
+    datePicker
   },
   data: () => ({
     selectedAppointment: {},
@@ -93,16 +98,19 @@ export default {
       endDate: '',
       service: '',
       employee: '',
-      status: 'all',
+      status: 'all'
     },
     headers: [
       { text: 'name', value: 'name' },
+      { text: 'Status', value: 'status' },
       { text: 'Start time', value: 'start' },
       { text: 'End time', value: 'end' },
       { text: 'Employee', value: 'employeeName' },
       { text: 'Customer', value: 'customerName' },
-      { text: 'Actions', value: 'actions', sortable: false },
-    ],
+      { text: 'Price', value: 'price' },
+      { text: 'Pricing Method', value: 'pricingMethod' },
+      { text: 'Actions', value: 'actions', sortable: false }
+    ]
   }),
 
   methods: {
@@ -136,7 +144,7 @@ export default {
     },
     closeModalDetail() {
       this.modalDettail = false;
-    },
+    }
   },
   computed: mapGetters([
     'get_Services',
@@ -145,7 +153,7 @@ export default {
     'get_Employees',
     'get_loadEmployee',
     'get_AppointmentsF',
-    'get_loadAppointment',
+    'get_loadAppointment'
   ]),
   mounted() {
     this.GetServices({ page: 1, text: '' });
@@ -156,7 +164,7 @@ export default {
     this.search.endDate = date;
 
     this.filter();
-  },
+  }
 };
 </script>
 

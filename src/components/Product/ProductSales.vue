@@ -27,13 +27,7 @@
           </v-row>
         </v-form>
 
-        <v-data-table
-          :loading="get_loadProduct"
-          :headers="headers"
-          :items="get_SalesForProduct"
-          hide-default-footer
-          class="elevation-1 mt-3"
-        >
+        <v-data-table :headers="headers" :items="get_SalesForProduct" hide-default-footer class="elevation-1 mt-3">
           <template v-slot:item.actions="{ item }">
             <div class="d-flex">
               <v-btn :to="{ name: 'Invoice', params: { id: item.invoiceId } }" depressed small>
@@ -53,13 +47,13 @@ import datePicker from '../../components/Shared/DatePicker';
 const moment = require('moment');
 export default {
   components: {
-    datePicker,
+    datePicker
   },
   data: () => ({
     search: {
       startDate: '',
       endDate: '',
-      id: '',
+      id: ''
     },
     headers: [
       { text: 'Date', value: 'date' },
@@ -68,8 +62,8 @@ export default {
       { text: 'Salling Price', value: 'actualAmountPaid' },
       { text: 'Quantity', value: 'quantity' },
       { text: 'Revenue', value: 'totalPrice' },
-      { text: 'Actions', value: 'actions', sortable: false },
-    ],
+      { text: 'Actions', value: 'actions', sortable: false }
+    ]
   }),
   methods: {
     ...mapActions(['GetSalesForProduct']),
@@ -92,7 +86,7 @@ export default {
       this.search.endDate = date2.add(1, 'days').format('YYYY-MM-DD');
       this.search.id = this.$route.params.id;
       this.GetSalesForProduct(this.search);
-    },
+    }
   },
   computed: {
     ...mapGetters(['get_SalesForProduct', 'get_loadProduct']),
@@ -102,11 +96,11 @@ export default {
         total += element.totalPrice;
       });
       return total;
-    },
+    }
   },
   mounted() {
     this.clearFilter();
-  },
+  }
 };
 </script>
 

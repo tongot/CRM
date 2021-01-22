@@ -13,8 +13,8 @@ const state = {
   stockTrack: {
     InternalTrans: 0,
     ReturnStock: 0,
-    NewStock: 0,
-  },
+    NewStock: 0
+  }
 };
 const getters = {
   get_Products: (state) => state.Products,
@@ -23,7 +23,7 @@ const getters = {
   get_errorProduct: (state) => state.errorProduct,
   get_StocksForProd: (state) => state.StocksForProd,
   get_SalesForProduct: (state) => state.SalesForProduct,
-  get_StockTrack: (state) => state.stockTrack,
+  get_StockTrack: (state) => state.stockTrack
 };
 const actions = {
   SetEditProduct({ commit }, product) {
@@ -42,7 +42,7 @@ const actions = {
         name: search.name,
         code: search.code,
         categoryId: search.categoryId,
-        brandId: search.brandId,
+        brandId: search.brandId
       })
       .then((response) => {
         if (response.status === 200) {
@@ -78,7 +78,7 @@ const actions = {
       .post('Product/stockForProduct', {
         startDate: search.startDate,
         endDate: search.endDate,
-        id: search.id,
+        id: search.id
       })
       .then((response) => {
         if (response.status === 200) {
@@ -103,7 +103,7 @@ const actions = {
         productBrandId: product.productBrandId,
         price: product.price,
         discount: product.discount,
-        isRefreshment: product.isRefreshment,
+        isRefreshment: product.isRefreshment
       })
       .then(
         (response) => {
@@ -139,7 +139,7 @@ const actions = {
         comment: stock.comment,
         volume: stock.volume,
         measureWithUnits: stock.measureWithUnits,
-        unityMeasure: stock.unityMeasure,
+        unityMeasure: stock.unityMeasure
       })
       .then(
         (response) => {
@@ -203,7 +203,7 @@ const actions = {
         quantity: product.quantity,
         isRefreshment: product.isRefreshment,
         volume: product.volume,
-        operatingUnits: product.operatingUnits,
+        operatingUnits: product.operatingUnits
       })
       .then(
         (response) => {
@@ -248,7 +248,7 @@ const actions = {
       .post('Product/GetSalesForProduct', {
         startDate: search.startDate,
         endDate: search.endDate,
-        id: search.id,
+        id: search.id
       })
       .then((response) => {
         if (response.status === 200) {
@@ -260,7 +260,7 @@ const actions = {
         state.loadProduct = false;
         alert('could not load product ' + ex);
       });
-  },
+  }
 };
 const mutations = {
   set_Products: (state, data) =>
@@ -270,7 +270,8 @@ const mutations = {
     }),
   set_EditProduct: (state, data) => (state.Product = data),
 
-  set_StocksForProd: (state, data) =>
+  set_StocksForProd: (state, data) => (
+    (state.StocksForProd = []),
     data.forEach((item) => {
       item.date = getDate(item.date);
       if (item.comment == 'Returns') {
@@ -282,13 +283,14 @@ const mutations = {
         item.comment = 'Internal Transfer';
       }
       state.StocksForProd.push(item);
-    }),
+    })
+  ),
 
   set_SalesForProduct: (state, data) =>
     data.forEach((item) => {
       item.date = getDate(item.date);
       state.SalesForProduct.push(item);
-    }),
+    })
 };
 const getDate = (item) => {
   return moment(item).format('YYYY-MM-DD, HH:mm:ss');
@@ -297,5 +299,5 @@ export default {
   state,
   actions,
   getters,
-  mutations,
+  mutations
 };

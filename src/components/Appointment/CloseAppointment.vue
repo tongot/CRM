@@ -109,12 +109,12 @@ export default {
       description: '',
       isRefreshment: false,
       productId: '',
-      volume: '',
+      volume: ''
     },
     selectedItems: [],
     rules: {
-      required: (v) => !!v || 'this field is required',
-    },
+      required: (v) => !!v || 'this field is required'
+    }
   }),
   methods: {
     ...mapActions(['GetProductsToCloseAppointment', 'ChangeAppointmentState']),
@@ -141,7 +141,7 @@ export default {
           description: this.productName,
           isRefreshment: this.categories[0] == this.category ? true : false,
           productId: this.productId,
-          volume: this.volume,
+          volume: this.volume
         };
         this.selectedItems.push(newItem);
         return;
@@ -156,18 +156,22 @@ export default {
         status: this.data.status,
         id: this.data.appointmentId,
         actualPrice: this.actualPrice,
-        usedItems: this.selectedItems,
+        usedItems: this.selectedItems
       };
       this.ChangeAppointmentState(state).then(() => {
         this.$emit('close', false);
       });
+      this.clearAll();
+    },
+    clearAll() {
       this.selectItems = [];
       this.category = '';
       this.maxValue = '';
       this.productId = '';
       this.productName = '';
       this.volume = '';
-    },
+      this.actualPrice = '';
+    }
   },
   computed: {
     ...mapGetters(['get_loadAppointment', 'get_Ingredients', 'get_ItemUsed']),
@@ -183,16 +187,11 @@ export default {
         errors.push('Price lower than minimum');
       }
       return errors;
-    },
+    }
   },
   mounted() {
-    this.selectItems = [];
-    this.category = '';
-    this.maxValue = '';
-    this.productId = '';
-    this.productName = '';
-    this.volume = '';
-  },
+    this.clearAll();
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="get_Product != null" flat>
+    <v-card :loading="get_loadProduct" v-if="get_Product != null" flat>
       <v-row v-if="get_Product != null" class="pa-2">
         <v-col md="5" cols="12" xs="12" sm="12">
           <h4>Details</h4>
@@ -44,7 +44,7 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-  computed: mapGetters(['get_Product', 'get_Brand', 'get_Category'])
+  computed: mapGetters(['get_Product', 'get_Brand', 'get_Category', 'get_loadProduct'])
 };
 </script>
 

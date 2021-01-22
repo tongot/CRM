@@ -196,7 +196,7 @@
           <v-btn :loading="get_loadAppointment" @click="saveAppointment()" depressed color="success">
             <v-icon>mdi-save</v-icon>
             Save appointment
-            <v-chip color="error"> P{{ totalPrice }} </v-chip>
+            <v-chip color="error"> P{{ getTotalPrice }} </v-chip>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -217,7 +217,7 @@ export default {
   components: {
     Customers,
     datePicker,
-    Employees,
+    Employees
   },
   data: () => ({
     appointmentClash: false,
@@ -230,7 +230,7 @@ export default {
     deal: {
       date: '',
       customer: '',
-      appointments: [],
+      appointments: []
     },
     appointment: {
       startTime: '08:00',
@@ -239,10 +239,10 @@ export default {
       service: '',
       employee: null,
       disabled: false,
-      price: 0,
+      price: 0
     },
     modal: true,
-    required: (v) => !!v || 'this field is required',
+    required: (v) => !!v || 'this field is required'
   }),
   watch: {
     get_Employee: {
@@ -251,8 +251,8 @@ export default {
         if (val != null) {
           this.deal.appointments[this.currentIndex].employee = f;
         }
-      },
-    },
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -262,7 +262,7 @@ export default {
       'ClearCustomer',
       'ClearEmployee',
       'CheckAvailability',
-      'AddAppointment',
+      'AddAppointment'
     ]),
 
     getStartTime() {
@@ -288,6 +288,7 @@ export default {
       let selectedService = this.get_Services.filter((item) => {
         return item.id == service.service;
       });
+      console.log(selectedService[0]);
       service.duration = selectedService[0].estimateHours;
       this.totalPrice += selectedService[0].price;
       service.price = selectedService[0].price;
@@ -309,6 +310,7 @@ export default {
       return res;
     },
     addNewService(index) {
+      console.log('hit');
       if (this.$refs.formAdd.validate()) {
         this.errorAppoint = null;
 
@@ -324,7 +326,7 @@ export default {
               service: '',
               employee: null,
               disabled: false,
-              price: 0,
+              price: 0
             };
 
             this.deal.appointments.push(appointment);
@@ -421,7 +423,7 @@ export default {
           service: '',
           employee: null,
           disabled: false,
-          price: 0,
+          price: 0
         };
 
         this.deal.appointments.push(appointment);
@@ -432,7 +434,7 @@ export default {
     btnCancel() {
       this.fromSave = false;
       this.appointmentClash = false;
-    },
+    }
   },
   computed: {
     ...mapGetters([
@@ -445,8 +447,15 @@ export default {
       'get_Employee',
       'get_Appointments',
       'get_AppointmentError',
-      'get_loadAppointment',
+      'get_loadAppointment'
     ]),
+    getTotalPrice() {
+      let total = 0;
+      this.deal.appointments.forEach((item) => {
+        total += item.price;
+      });
+      return total;
+    }
   },
 
   mounted() {
@@ -454,14 +463,14 @@ export default {
     this.ClearEmployee();
     const search = {
       text: '',
-      page: 1,
+      page: 1
     };
     this.GetServices(search);
     setTimeout(() => {
       this.deal.date = this.getToday();
       this.deal.appointments.push(this.appointment);
     }, 200);
-  },
+  }
 };
 </script>
 

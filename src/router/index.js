@@ -73,7 +73,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LogIn
+    component: LogIn,
+    meta: { auth: false }
   },
   {
     path: '/pay-point',
@@ -224,6 +225,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.auth && store.getters.get_user == null) {
     next('/login');
+  }
+  if (to.name == 'login' && store.getters.get_user != null) {
+    console.log('jhit');
+    return;
   }
   next();
 });

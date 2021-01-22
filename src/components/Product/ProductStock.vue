@@ -26,7 +26,7 @@
       </v-card>
     </v-dialog>
 
-    <v-card :loading="get_loadProduct" flat="">
+    <v-card flat="">
       <v-card-title>Stock track<v-spacer></v-spacer> </v-card-title>
 
       <v-form ref="getForm" @submit.prevent="filter()">
@@ -89,7 +89,6 @@
         </v-col>
       </v-row>
       <v-data-table
-        :loading="get_loadProduct"
         :headers="headers"
         :items="get_StocksForProd"
         hide-default-footer

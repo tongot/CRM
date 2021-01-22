@@ -13,7 +13,6 @@
               CRM designed for small to medium businesses
             </v-card-text>
             <v-card-actions>
-              <v-spacer> </v-spacer>
               <button large depressed>Request for demo</button>
             </v-card-actions>
           </div>

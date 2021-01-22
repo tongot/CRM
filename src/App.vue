@@ -1,14 +1,8 @@
 <template>
   <div>
-    <v-dialog v-model="get_login_loading" hide-overlay persistent width="300">
-      <v-card color="primary" dark>
-        <v-card-text>
-          Please stand by
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-
+    <v-overlay :value="get_login_loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
     <v-app v-if="get_user != null">
       <SnackBar />
       <v-navigation-drawer v-model="drawer" v-if="get_user != null" app clipped>
@@ -65,7 +59,7 @@
     </v-app>
     <v-app v-if="get_user == null">
       <div class="landing" v-bind:style="{ backgroundImage: 'url(' + image + ')' }">
-        <landing-nav />
+        <landing-nav v-if="get_login_loading == false" />
         <v-main>
           <div>
             <transition
@@ -98,7 +92,7 @@ export default {
   },
 
   data: () => ({
-    dialog: false,
+    dialog: true,
     drawer: false,
     landingRoutes: ['Landing', 'landing-home', 'landing-features', 'landing-pricing', 'landing-works', 'landing-demo'],
     image: require('@/assets/landingcurve.png')
@@ -117,6 +111,17 @@ export default {
   mounted() {
     if (!this.landingRoutes.includes(this.$route.name)) {
       this.GetUserDetails();
+    }
+    if (this.landingRoutes.includes(this.$route.name) || this.$route.name == 'login') {
+      this.GetUserDetails().then(() => {
+        console.log(this.get_user);
+        if (this.get_user != null) {
+          this.$router.push({ name: 'Home' });
+        }
+      });
+    }
+    if (this.$route.name == 'Landing') {
+      this.$router.push({ name: 'landing-home' });
     }
   }
 };

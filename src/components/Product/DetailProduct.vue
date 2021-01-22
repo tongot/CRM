@@ -95,13 +95,13 @@ import { mapGetters, mapActions } from 'vuex';
 import Stock from './AddStock';
 export default {
   components: {
-    Stock,
+    Stock
   },
   data: () => ({
     modalStock: false,
     id: null,
     itemName: '',
-    modalDelete: false,
+    modalDelete: false
   }),
   methods: {
     ...mapActions(['GetProductById', 'GetCategoryById', 'GetBrandById', 'DeleteProduct']),
@@ -112,7 +112,7 @@ export default {
     },
     Delete() {
       this.DeleteProduct(this.$route.params.id);
-    },
+    }
   },
   computed: mapGetters(['get_Product', 'get_loadProduct', 'get_Brand', 'get_Category']),
   mounted() {
@@ -120,7 +120,7 @@ export default {
       this.GetCategoryById(this.get_Product.productCategoryId);
       this.GetBrandById(this.get_Product.productBrandId);
     });
-  },
+  }
 };
 </script>
 
