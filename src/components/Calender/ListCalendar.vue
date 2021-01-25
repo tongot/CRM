@@ -93,14 +93,14 @@ import { getColor, FullMonthsArr, HalfMonth } from '../../../SharedFunc';
 import AppointmentDisplay from './AppointmentDisplay';
 export default {
   components: {
-    AppointmentDisplay,
+    AppointmentDisplay
   },
   data: () => ({
     yearMonth: {
       month: '',
       year: '',
       employeeId: '',
-      customerId: '',
+      customerId: ''
     },
     title: '',
     colorHit: false,
@@ -115,12 +115,12 @@ export default {
     weekdays: [
       { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
       { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-      { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
+      { text: 'Mon, Wed, Fri', value: [1, 3, 5] }
     ],
     search: {
       page: 1,
-      text: '',
-    },
+      text: ''
+    }
   }),
   methods: {
     ...mapActions(['GetCalendarItems', 'GetEmployees']),
@@ -166,11 +166,13 @@ export default {
           month: HalfMonth.indexOf(this.getDates()[0]) + 1,
           year: this.getDates()[3],
           employeeId: this.yearMonth.employeeId,
+          customerId: ''
         };
         const secondCall = {
           month: HalfMonth.indexOf(this.getDates()[2]) + 1,
           year: this.getDates()[3],
           employeeId: this.yearMonth.employeeId,
+          customerId: ''
         };
         this.GetCalendarItems({ data: firstCall, toClear: true }).then(() => {
           this.GetCalendarItems({ data: secondCall, toClear: false });
@@ -182,11 +184,13 @@ export default {
           month: HalfMonth.indexOf(this.getDates()[0]) + 1,
           year: this.getDates()[1],
           employeeId: this.yearMonth.employeeId,
+          customerId: ''
         };
         const secondCall = {
           month: HalfMonth.indexOf(this.getDates()[3]) + 1,
           year: this.getDates()[4],
           employeeId: this.yearMonth.employeeId,
+          customerId: ''
         };
         this.GetCalendarItems({ data: firstCall, toClear: true }).then(() => {
           this.GetCalendarItems({ data: secondCall, toClear: false });
@@ -198,10 +202,10 @@ export default {
         event.color = getColor();
       }
       return event.color;
-    },
+    }
   },
   computed: {
-    ...mapGetters(['get_CalendarItems', 'get_loadCalendar', 'get_Employees', 'get_loadEmployee']),
+    ...mapGetters(['get_CalendarItems', 'get_loadCalendar', 'get_Employees', 'get_loadEmployee'])
   },
   mounted() {
     this.GetEmployees(this.search).then(() => {
@@ -210,7 +214,7 @@ export default {
     setTimeout(() => {
       this.getAppointments();
     }, 100);
-  },
+  }
 };
 </script>
 

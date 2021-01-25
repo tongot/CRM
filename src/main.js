@@ -8,8 +8,8 @@ import 'animate.css';
 import chartkick from 'vue-chartkick';
 import chart from 'chart.js';
 
-//axios.defaults.baseURL = 'http://localhost:5000/';
-axios.defaults.baseURL = 'https://exappo.azurewebsites.net';
+axios.defaults.baseURL = 'http://localhost:5000/';
+//axios.defaults.baseURL = 'https://exappo.azurewebsites.net';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('authToken');
 
 Vue.use(require('vue-moment'));
