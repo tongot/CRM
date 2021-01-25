@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$main_color: #df9ca8;
+$main_color: #ffb04f;
 
 .heading {
   display: flex;

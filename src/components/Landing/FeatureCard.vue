@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="icon">
-      <v-icon size="50" color="#df9ca8">{{ data.icon }}</v-icon>
+      <v-icon size="50" color="#ffb04f">{{ data.icon }}</v-icon>
     </div>
     <!-- <div class="heading">
       <h4>{{ data.title }}</h4>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$main_color: #df9ca8;
+$main_color: #ffb04f;
 .card {
   height: 200px;
   background-color: white;

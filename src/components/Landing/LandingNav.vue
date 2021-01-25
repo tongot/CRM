@@ -13,6 +13,23 @@
           <a>{{ link.label }} </a>
         </li>
       </ul>
+      <v-menu elevation-1 offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="black" class="menu-btn" icon dark v-bind="attrs" v-on="on">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </template>
+        <ul class="nav-list-drop">
+          <li
+            v-for="(link, index) in links"
+            :key="link.name"
+            :class="link.isActive == true ? 'current' : ''"
+            @click="changeClass(index, link.name)"
+          >
+            <a>{{ link.label }} </a>
+          </li>
+        </ul>
+      </v-menu>
     </v-app-bar>
   </div>
 </template>
@@ -41,11 +58,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$main_color: #df9ca8;
+$main_color: #ffb04f;
 .nav-landing {
   background-color: transparent;
-  color: $main_color;
+  color: black;
   top: 0%;
+  padding-right: 20px;
 }
 .nav-list {
   list-style: none;
@@ -67,6 +85,40 @@ $main_color: #df9ca8;
   }
   .current {
     border-bottom: solid $main_color 3px;
+  }
+}
+.nav-list-drop {
+  background-color: #ffb04f;
+  list-style: none;
+  li {
+    margin-top: 10px;
+    &:hover {
+      transform: translateY(-3px);
+      transition: transform ease-in-out 172ms;
+    }
+    a {
+      color: black;
+      padding-right: 20px;
+      padding-left: 20px;
+      margin-right: 5px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  .current {
+    border-bottom: solid $main_color 3px;
+  }
+}
+.menu-btn {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .nav-list {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
   }
 }
 </style>

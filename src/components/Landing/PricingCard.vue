@@ -18,7 +18,7 @@
     </div>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="#df9ca8" depressed class="white--text">Request demo now</v-btn>
+      <v-btn color="#ffb04f" depressed class="white--text">Request demo now</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>

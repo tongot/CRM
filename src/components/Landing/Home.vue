@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$main_color: #df9ca8;
+$main_color: #ffb04f;
 $content: #8a5b051a;
 .content {
   background-color: $content;
@@ -136,6 +136,28 @@ $content: #8a5b051a;
   align-items: center;
   img {
     height: 500px;
+  }
+}
+@media (max-width: 780px) {
+  .heading {
+    h4 {
+      padding-top: 110px;
+      text-align: center;
+    }
+  }
+  .co-image {
+    display: none;
+  }
+  .content {
+    margin-top: -150px;
+  }
+  .moto {
+    div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
   }
 }
 </style>
