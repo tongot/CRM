@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar fixed dark color="transparent" class="nav-landing" flat>
+    <v-app-bar fixed color="#97827e75" class="nav-landing" flat>
       <v-toolbar-title>Xpert</v-toolbar-title>
       <v-spacer></v-spacer>
       <ul class="nav-list">
@@ -59,6 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 $main_color: #ffb04f;
+$main_color: #97827e75;
 .nav-landing {
   background-color: transparent;
   color: black;

@@ -20,7 +20,7 @@ export default {
     items: [
       {
         title: 'Basic',
-        amount: '500.00 P',
+        amount: 'BWP500.00',
         features: [
           { color: 'success', feature: 'Maintenance', icon: 'mdi-check' },
           { color: 'success', feature: 'Continueous upgrading', icon: 'mdi-check' },
@@ -31,7 +31,7 @@ export default {
       },
       {
         title: 'Premium',
-        amount: '700.00 P +',
+        amount: 'BWP700.00+',
         features: [
           { color: 'success', feature: 'Maintenance', icon: 'mdi-check' },
           { color: 'success', feature: 'Continueous upgrading', icon: 'mdi-check' },
@@ -42,7 +42,7 @@ export default {
       },
       {
         title: 'Executive',
-        amount: '1000.00 P +',
+        amount: 'BWP1000.00+',
         features: [
           { color: 'success', feature: 'Maintenance', icon: 'mdi-check' },
           { color: 'success', feature: 'Continueous upgrading', icon: 'mdi-check' },
